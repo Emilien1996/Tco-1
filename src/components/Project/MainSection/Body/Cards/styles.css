@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+
+.my-card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.my-card-img {
+    border: 4px solid #fff;
+    border-radius: 50%;
+}
+
+.my-card-circle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    border: 3px solid rgb(121, 49, 49);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: violet;
+}
+
+.my-img-wrapper {
+    background-color: yellow;
+}
+
+.my-card {
+    background-color: #fff;
+    position: relative;
+    margin: 10px;
+    text-align: center;
+    width: calc(100%/4);
+    height: 420px;
+    box-shadow: 0 0 15px grey;
+}
+
+.my-card-user {
+    font-size: 2rem;
+    font-weight: 400;
+}
