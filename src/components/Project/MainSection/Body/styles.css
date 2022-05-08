@@ -3,3 +3,9 @@
   height: calc(100% - 200px);
   background-color: grey;
 }
+
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
