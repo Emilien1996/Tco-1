@@ -7,26 +7,43 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import {
+  isRequired,
+  maxLength20,
+  minLength3,
+} from "../../../../../validation/validation";
 
 const AddTaskForm = ({ toggle, addTask }) => {
   const [InputsValue, setInputsValue] = useState({
     title: {
       value: "",
       error: "",
+      validations: [isRequired, minLength3, maxLength20],
     },
     description: {
       value: "",
       error: "",
+      validations: [isRequired, minLength3, maxLength20],
     },
   });
   const changeHandler = (e) => {
+    let error;
+    const { validations } = InputsValue[e.target.name];
+    for (let i = 0; i < validations.length; i++) {
+      const validation = validations[i];
+      const errormessage = validation(e.target.value);
+      if (errormessage) {
+        error = errormessage;
+        break;
+      }
+    }
     setInputsValue((prev) => {
       return {
         ...prev,
         [e.target.name]: {
           ...prev[e.target.name],
           value: e.target.value,
-          error: "",
+          error,
         },
       };
     });
@@ -64,10 +81,12 @@ const AddTaskForm = ({ toggle, addTask }) => {
           name="title"
           onChange={changeHandler}
           type="text"
-          invalid
+          invalid={!!InputsValue.title.error}
           placeholder="insert Title"
         />
-        <FormFeedback>Error please check the value</FormFeedback>
+        {InputsValue.title.error && (
+          <FormFeedback>Error please check the value</FormFeedback>
+        )}
       </FormGroup>
       <FormGroup>
         <Label for="DiscriptionId">Description</Label>
@@ -75,10 +94,12 @@ const AddTaskForm = ({ toggle, addTask }) => {
           name="description"
           onChange={changeHandler}
           type="text"
-          invalid
+          invalid={!!InputsValue.description.error}
           placeholder="insert Discription"
         />
-        <FormFeedback>Error please enter the value</FormFeedback>
+        {InputsValue.description.error && (
+          <FormFeedback>Error please enter the value</FormFeedback>
+        )}
       </FormGroup>
       <Button color="primary" onClick={onSubmit}>
         Add Task
