@@ -4,7 +4,7 @@ import "./styles.css";
 export const Body = ({ data, setData }) => {
   const [editvalue, setedit] = useState(false);
   const editTask = (id, title, description) => {
-    debugger;
+    console.log(id);
     const formData = {
       title,
       description,
@@ -16,7 +16,7 @@ export const Body = ({ data, setData }) => {
       },
       body: JSON.stringify(formData),
     });
-    setedit((prev) => prev);
+    setedit((prev) => !prev);
   };
   const onRemoveTask = (id) => {
     fetch(`http://localhost:3001/task/${id}`, {
