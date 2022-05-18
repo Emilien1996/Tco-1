@@ -1,18 +1,18 @@
-import { FormGroup, Input, Label } from "reactstrap";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./styles.css";
+
+const DatePic = () => {
+  const [startDate, setStartDate] = useState(new Date());
+  return (
+    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+  );
+};
 export const FilterSection = () => {
   return (
     <div className="filter-section">
-      <FormGroup>
-        <Label for="exampleSelect">Select</Label>
-        <Input id="exampleSelect" name="select" type="select">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </Input>
-      </FormGroup>
+      <DatePic />
     </div>
   );
 };

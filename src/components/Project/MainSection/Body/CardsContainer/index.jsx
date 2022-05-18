@@ -17,8 +17,7 @@ const CardContainer = ({
   status,
   onRemove,
   onEdit,
-  editbutton,
-  setedit,
+  editStatus,
 }) => {
   const [editInput, setEditInput] = useState({
     title: {
@@ -28,6 +27,26 @@ const CardContainer = ({
       value: description,
     },
   });
+  const [isEditable, setEditable] = useState(false);
+
+  const [statusValue, setStatusValue] = useState({
+    value: status,
+  });
+  const statusHandler = (e) => {
+    setStatusValue((prev) => {
+      if (prev.value === "active") {
+        return {
+          ...prev,
+          value: "done",
+        };
+      } else
+        return {
+          ...prev,
+          value: "active",
+        };
+    });
+    editStatus(_id, statusValue.value);
+  };
 
   const editHandler = (e) => {
     setEditInput((prev) => {
@@ -45,7 +64,7 @@ const CardContainer = ({
       <Card>
         <CardBody>
           <CardTitle tag="h5">
-            {editbutton ? (
+            {isEditable ? (
               <Input
                 type="text"
                 value={editInput.title.value}
@@ -57,7 +76,7 @@ const CardContainer = ({
             )}
           </CardTitle>
           <CardSubtitle className="mb-2 text-muted" tag="h6">
-            {editbutton ? (
+            {isEditable ? (
               <Input
                 type="text"
                 value={editInput.description.value}
@@ -68,11 +87,16 @@ const CardContainer = ({
               description
             )}
           </CardSubtitle>
-          {editbutton && (
+          {isEditable && (
             <Button
-              color="success"
+              color="primary"
               onClick={() =>
-                onEdit(_id, editInput.title.value, editInput.description.value)
+                onEdit(
+                  _id,
+                  editInput.title.value,
+                  editInput.description.value,
+                  () => setEditable(false)
+                )
               }
             >
               OK
@@ -81,11 +105,16 @@ const CardContainer = ({
         </CardBody>
         <img alt="Ca" src="https://picsum.photos/318/180" width="100%" />
         <CardBody>
-          <CardText>{status}</CardText>
-          <Button color="success" onClick={() => onRemove(_id)}>
-            Done
+          <Button
+            color={statusValue.value === "active" ? "primary" : "danger"}
+            onClick={statusHandler}
+          >
+            {statusValue.value}
           </Button>
-          <Button color="success" onClick={() => setedit((prev) => !prev)}>
+          <Button color="success" onClick={() => onRemove(_id)}>
+            Delete
+          </Button>
+          <Button color="success" onClick={() => setEditable(true)}>
             Edit
           </Button>
           <CardText>{created_at}</CardText>

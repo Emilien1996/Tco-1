@@ -1,9 +1,17 @@
-import { useState } from "react";
 import CardContainer from "./CardsContainer";
 import "./styles.css";
 export const Body = ({ data, setData }) => {
-  const [editvalue, setedit] = useState(false);
-  const editTask = (id, title, description) => {
+  const editStatus = (id, value) => {
+    debugger;
+    fetch(`http://localhost:3001/task/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "Application/json",
+      },
+      body: JSON.stringify(value),
+    });
+  };
+  const editTask = (id, title, description, onClose) => {
     console.log(id);
     const formData = {
       title,
@@ -15,8 +23,19 @@ export const Body = ({ data, setData }) => {
         "Content-Type": "Application/json",
       },
       body: JSON.stringify(formData),
-    });
-    setedit((prev) => !prev);
+    })
+      .then((res) => res.json())
+      .then((data) =>
+        setData((task) =>
+          task.map((task) => {
+            if (task._id === id) {
+              return data;
+            }
+            return task;
+          })
+        )
+      );
+    onClose();
   };
   const onRemoveTask = (id) => {
     fetch(`http://localhost:3001/task/${id}`, {
@@ -39,8 +58,7 @@ export const Body = ({ data, setData }) => {
               key={i}
               onRemove={onRemoveTask}
               onEdit={editTask}
-              editbutton={editvalue}
-              setedit={setedit}
+              editStatus={editStatus}
             />
           );
         })}
