@@ -17,8 +17,6 @@ const SortButton = () => {
       <Input id="exampleSelect" name="select" type="select" onChange={changehandler}>
         <option value="creation_date_newest">Creation newest</option>
         <option value='creation_date_oldest'>Created oldest</option>
-        <option >newest</option>
-        <option>oldest</option>
         <option value='a-z'>A-Z</option>
         <option value='z-a'>Z-A</option>
       </Input>
