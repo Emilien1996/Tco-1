@@ -29,23 +29,13 @@ const CardContainer = ({
   });
   const [isEditable, setEditable] = useState(false);
 
-  const [statusValue, setStatusValue] = useState({
-    value: status,
-  });
   const statusHandler = (e) => {
-    setStatusValue((prev) => {
-      if (prev.value === "active") {
-        return {
-          ...prev,
-          value: "done",
-        };
-      } else
-        return {
-          ...prev,
-          value: "active",
-        };
-    });
-    editStatus(_id, statusValue.value);
+    if (status === "active") {
+      editStatus(_id, 'done');
+    } else if (status === "done") {
+      editStatus(_id, 'active');
+    }
+
   };
 
   const editHandler = (e) => {
@@ -106,10 +96,10 @@ const CardContainer = ({
         <img alt="Ca" src="https://picsum.photos/318/180" width="100%" />
         <CardBody>
           <Button
-            color={statusValue.value === "active" ? "primary" : "danger"}
+            color={status === "active" ? "primary" : "danger"}
             onClick={statusHandler}
           >
-            {statusValue.value}
+            {status}
           </Button>
           <Button color="success" onClick={() => onRemove(_id)}>
             Delete

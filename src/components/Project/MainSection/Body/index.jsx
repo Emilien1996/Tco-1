@@ -2,14 +2,25 @@ import CardContainer from "./CardsContainer";
 import "./styles.css";
 export const Body = ({ data, setData }) => {
   const editStatus = (id, value) => {
-    debugger;
+
     fetch(`http://localhost:3001/task/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "Application/json",
       },
-      body: JSON.stringify(value),
-    });
+      body: JSON.stringify({ status: value }),
+    })
+      .then(res => res.json())
+      .then((data) =>
+        setData((task) =>
+          task.map((task) => {
+            if (task._id === id) {
+              return data;
+            }
+            return task;
+          })
+        )
+      );
   };
   const editTask = (id, title, description, onClose) => {
     console.log(id);
