@@ -2,7 +2,6 @@ import CardContainer from "./CardsContainer";
 import "./styles.css";
 export const Body = ({ data, setData }) => {
   const editStatus = (id, value) => {
-    debugger;
     fetch(`http://localhost:3001/task/${id}`, {
       method: "PUT",
       headers: {
