@@ -3,8 +3,19 @@
   display: flex;
   justify-content: flex-end;
 }
+
 .navbar-list {
   display: flex;
   align-items: center;
   height: 100%;
+}
+
+.navbar-list>li {
+  margin: 10px;
+}
+
+.navbar-list li a {
+  font-size: 18px;
+  text-decoration: none;
+  color: white
 }
