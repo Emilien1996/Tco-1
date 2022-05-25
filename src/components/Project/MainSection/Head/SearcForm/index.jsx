@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 
 const SearchForm = ({ handleSearch }) => {

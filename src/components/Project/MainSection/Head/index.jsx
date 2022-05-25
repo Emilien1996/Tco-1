@@ -5,7 +5,7 @@ import SearchForm from "./SearcForm";
 import SortButton from "./SortButton";
 import "./styles.css";
 export const Head = () => {
-  const { SetTasks, setFilteredField } = useContext(TaskContext);
+  const { setFilteredField } = useContext(TaskContext);
   const handleSort = (e) => {
     const { value } = e;
     setFilteredField(["sort", value]);
