@@ -10,9 +10,10 @@ const SortButton = ({ handleSort }) => {
         type="select"
         onChange={handleSort}
       >
-        <option>Creation date</option>
-        <option>Status</option>
-        <option>A-Z</option>
+        <option value={"creation_date_oldest"}>Creation date oldest</option>
+        <option value={"z-a"}>Z-A</option>
+        <option value={"a-z"}>A-Z</option>
+        <option value={'creation_date_newest'}>Creation date newest</option>
       </Input>
     </FormGroup>
   );

@@ -7,11 +7,12 @@ import "./styles.css";
 export const Head = () => {
   const { setFilteredField } = useContext(TaskContext);
   const handleSort = (e) => {
-    const { value } = e;
+    const { value } = e.target
     setFilteredField(["sort", value]);
   };
   const handleSearch = (e) => {
-    const { value } = e;
+    const { value } = e.target
+    console.log(value)
     setFilteredField(["search", value]);
   };
   return (

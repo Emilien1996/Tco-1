@@ -5,7 +5,7 @@ import "./styles.css";
 export const TaskContext = createContext();
 export const MainSection = () => {
   const [Tasks, SetTasks] = useState([]);
-  const [queryObject, setqueryObject] = useState({});
+  const [queryObject, setQueryObject] = useState({});
   const generateQuery = (filterObject) => {
     // [['sort','created_at'] ,['search','barev']]]
     return Object.entries(filterObject).reduce((query, [field, value]) => {
@@ -15,14 +15,16 @@ export const MainSection = () => {
   };
   useEffect(() => {
     const query = generateQuery(queryObject);
+    console.log(queryObject)
     fetch(`http://localhost:3001/task${query ? `?${query}` : ""}`)
       .then((res) => res.json())
       .then((task) => SetTasks(task));
   }, [queryObject]);
   const setFilteredField = useCallback((filterEntries) => {
-    debugger;
+
     const [name, value] = filterEntries;
-    setqueryObject((prev) => {
+    console.log(filterEntries)
+    setQueryObject((prev) => {
       if (!value) {
         const newQueryObject = { ...prev };
         delete newQueryObject[name];
@@ -34,6 +36,7 @@ export const MainSection = () => {
           [name]: value,
         };
       }
+      return prev
     }, []);
   });
   return (
