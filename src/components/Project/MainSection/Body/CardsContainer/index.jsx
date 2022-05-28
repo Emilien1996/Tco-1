@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
   Button,
   Card,
@@ -31,11 +32,10 @@ const CardContainer = ({
 
   const statusHandler = (e) => {
     if (status === "active") {
-      editStatus(_id, 'done');
+      editStatus(_id, "done");
     } else if (status === "done") {
-      editStatus(_id, 'active');
+      editStatus(_id, "active");
     }
-
   };
 
   const editHandler = (e) => {
@@ -53,18 +53,21 @@ const CardContainer = ({
     <div>
       <Card>
         <CardBody>
-          <CardTitle tag="h5">
-            {isEditable ? (
-              <Input
-                type="text"
-                value={editInput.title.value}
-                onChange={editHandler}
-                name="title"
-              />
-            ) : (
-              title
-            )}
-          </CardTitle>
+          <NavLink to={`/${_id}`}>
+            <CardTitle tag="h5">
+              {isEditable ? (
+                <Input
+                  type="text"
+                  value={editInput.title.value}
+                  onChange={editHandler}
+                  name="title"
+                />
+              ) : (
+                title
+              )}
+            </CardTitle>
+          </NavLink>
+
           <CardSubtitle className="mb-2 text-muted" tag="h6">
             {isEditable ? (
               <Input
