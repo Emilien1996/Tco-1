@@ -15,15 +15,14 @@ export const MainSection = () => {
   };
   useEffect(() => {
     const query = generateQuery(queryObject);
-    console.log(queryObject)
+    console.log(queryObject);
     fetch(`http://localhost:3001/task${query ? `?${query}` : ""}`)
       .then((res) => res.json())
       .then((task) => SetTasks(task));
   }, [queryObject]);
   const setFilteredField = useCallback((filterEntries) => {
-
     const [name, value] = filterEntries;
-    console.log(filterEntries)
+    console.log(filterEntries);
     setQueryObject((prev) => {
       if (!value) {
         const newQueryObject = { ...prev };
@@ -36,7 +35,7 @@ export const MainSection = () => {
           [name]: value,
         };
       }
-      return prev
+      return prev;
     }, []);
   });
   return (

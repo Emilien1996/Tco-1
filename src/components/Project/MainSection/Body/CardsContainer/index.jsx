@@ -29,7 +29,7 @@ const CardContainer = ({
     },
   });
   const [isEditable, setEditable] = useState(false);
-
+  console.log(editInput);
   const statusHandler = (e) => {
     if (status === "active") {
       editStatus(_id, "done");
