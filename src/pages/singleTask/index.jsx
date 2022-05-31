@@ -18,7 +18,7 @@ const SingleTask = () => {
     });
   };
 
-  console.log(singleTask);
+
   const params = useParams();
   const taskId = params.taskId;
   const navigate = useNavigate();
@@ -58,10 +58,11 @@ const SingleTask = () => {
             type="text"
             value={singleTask.title}
             onChange={editHandler}
+            onBlur={onBlur}
             name="title"
           />
         ) : (
-          <p onClick={() => isEditable()} onBlur={onBlur}>
+          <p onClick={() => isEditable()} >
             {singleTask.title}
           </p>
         )}
@@ -71,6 +72,7 @@ const SingleTask = () => {
             value={singleTask.description}
             onChange={editHandler}
             name="description"
+            onBlur={onBlur}
           />
         ) : (
           <p onClick={() => isEditable()} onBlur={onBlur}>

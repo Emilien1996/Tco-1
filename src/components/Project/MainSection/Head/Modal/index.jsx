@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { TaskContext } from "../..";
+import { TaskContext } from "../../..";
 import AddTaskForm from "../ValidForm";
 
 const ModalButton = () => {

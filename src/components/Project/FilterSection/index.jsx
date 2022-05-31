@@ -1,25 +1,37 @@
-import React, { useContext, useState } from "react";
-import DatePicker from "react-datepicker";
+import React, { useState, useCallback } from "react";
+
 import "react-datepicker/dist/react-datepicker.css";
 import "./styles.css";
 
-const DatePic = ({ sortname }) => {
-  const [startDate, setStartDate] = useState(new Date());
 
-  return <DatePicker selected={startDate} />;
-};
-export const FilterSection = () => {
-  const [startDate, setStartDate] = useState(new Date());
+export const FilterSection = ({ setFilteredField }) => {
+  const Filter_Date_Pickers = [
+    { label: "Created Later", value: 'create_lte' },
+    { label: "Created Greater", value: 'create_gte' },
+    { label: "Completed Later", value: 'complete_lte' },
+    { label: "Completed Greater", value: 'complete_gte' }
+  ]
+  const [createdLte] = useState(new Date())
+  const [createGte] = useState(new Date())
+  const [completeLte] = useState(new Date())
+  const [completeGte] = useState(new Date())
+  const getFilterState = useCallback((name) => {
+    switch (name) {
+      case 'create_lte':
+        return createdLte
+      case "createGte":
+        return createGte
+      case 'complete_lte':
+        return completeLte
+      case 'complete_gte':
+        return completeGte
+    }
+  }, [createdLte, createGte, completeLte, completeGte])
+
   return (
     <div className="filter-section">
-      create_lte
-      <DatePic sortname="create_lte" />
-      create_gte
-      <DatePic sortname="create_gte" />
-      complete_lte
-      <DatePic sortname="complete_lte" />
-      complete_gte
-      <DatePic sortname="complete_gte" />
+
+
     </div>
   );
 };

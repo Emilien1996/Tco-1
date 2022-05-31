@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { TaskContext } from "..";
+import { TaskContext } from "../..";
 import ModalButton from "./Modal";
 import SearchForm from "./SearcForm";
 import SortButton from "./SortButton";
