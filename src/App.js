@@ -7,6 +7,7 @@ import NotFound from "./pages/404 page";
 import SingleTask from "./pages/singleTask";
 
 function App() {
+ 
   return (
     <div className="App">
       <BrowserRouter>

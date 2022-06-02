@@ -6,7 +6,7 @@ import * as moment from "moment";
 
 
 export const FilterSection = ({ setFilteredField }) => {
-  const FILTER_DATE_PICKERS = [
+  const Filter_Date_Pickers = [
     { label: "Created Later", value: 'create_lte' },
     { label: "Created Greater", value: 'create_gte' },
     { label: "Completed Later", value: 'complete_lte' },
@@ -35,34 +35,7 @@ export const FilterSection = ({ setFilteredField }) => {
   );
   return (
     <div className="filter-section">
- {FILTER_DATE_PICKERS.map((pickerData, index) => {
-        const [date, setDate] = getFilterState(pickerData.value);
-
-        return (
-          <div key={index}>
-            <p>{pickerData.label}</p>
-            <DatePick
-              startDate={date}
-              setStartDate={(date) => {
-                setDate(date);
-                setFilteredField([
-                  pickerData.value,
-                  moment(date).format("YYYY-MM-DD"),
-                ]);
-              }}
-              name={pickerData.value}
-            />
-            <button
-              onClick={() => {
-                setDate(new Date());
-                setFilteredField([pickerData.value, ""]);
-              }}
-            >
-              Reset
-            </button>
-          </div>
-        );
-      })}
+ 
     </div>
   );
 };

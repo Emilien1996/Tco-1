@@ -1,11 +1,13 @@
-import DatePicker from "react-datepicker"
+import DatePicker from "react-datepicker";
 
-const DatePick = ({startDate,setStartDate,name}) => {
-	return (
-		<DatePicker
-		selected={startDate}
-		onChange={(date) => setStartDate(date, name)}
-	/>
-	)
-}
-export default DatePick
+import React, { memo } from "react";
+const DatePick = ({ startDate, setStartDate, name }) => {
+ 
+  return (
+    <DatePicker
+      selected={startDate}
+      onChange={(date) => setStartDate(date, name)}
+    />
+  );
+};
+export default memo(DatePick);
