@@ -8,6 +8,7 @@ import {
   CardText,
   CardTitle,
   Input,
+  Label,
 } from "reactstrap";
 
 const CardContainer = ({
@@ -19,6 +20,7 @@ const CardContainer = ({
   onRemove,
   onEdit,
   editStatus,
+  toggleDeletedTask
 }) => {
   const [editInput, setEditInput] = useState({
     title: {
@@ -52,6 +54,10 @@ const CardContainer = ({
   return (
     <div>
       <Card>
+        <Input type="checkbox" onClick={() => toggleDeletedTask(_id)} />
+        <Label check>
+          Select card
+        </Label>
         <CardBody>
           <NavLink to={`/${_id}`}>
             <CardTitle tag="h5">

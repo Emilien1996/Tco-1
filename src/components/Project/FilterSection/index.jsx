@@ -12,10 +12,10 @@ export const FilterSection = ({ setFilteredField }) => {
     { label: "Completed Later", value: 'complete_lte' },
     { label: "Completed Greater", value: 'complete_gte' }
   ]
-  const [createdLte] = useState(new Date())
-  const [createdGte] = useState(new Date())
-  const [completedLte] = useState(new Date())
-  const [completedGte] = useState(new Date())
+  const createdLte = useState(new Date())
+  const createdGte = useState(new Date())
+  const completedLte = useState(new Date())
+  const completedGte = useState(new Date())
   const getFilterState = useCallback(
     (name) => {
       switch (name) {
@@ -35,7 +35,34 @@ export const FilterSection = ({ setFilteredField }) => {
   );
   return (
     <div className="filter-section">
- 
+      {Filter_Date_Pickers.map((pickerData, index) => {
+        const [date, setDate] = getFilterState(pickerData.value);
+
+        return (
+          <div key={index}>
+            <p>{pickerData.label}</p>
+            <DatePick
+              startDate={date}
+              setStartDate={(date) => {
+                setDate(date);
+                setFilteredField([
+                  pickerData.value,
+                  moment(date).format("YYYY-MM-DD"),
+                ]);
+              }}
+              name={pickerData.value}
+            />
+            <button
+              onClick={() => {
+                setDate(new Date());
+                setFilteredField([pickerData.value, ""]);
+              }}
+            >
+              Reset
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 };

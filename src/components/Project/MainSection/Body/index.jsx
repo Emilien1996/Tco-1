@@ -1,6 +1,40 @@
+import { useState } from "react";
+import { Button } from "reactstrap";
 import CardContainer from "./CardsContainer";
 import "./styles.css";
 export const Body = ({ data, setData }) => {
+  const [DeletedTaskSet, setDeletedTask] = useState(new Set())
+  const toggleDeletedTask = (id) => {
+
+    setDeletedTask(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(id)) {
+        newSet.delete(id)
+      } else {
+        newSet.add(id)
+      }
+      return newSet
+    })
+  }
+  const deleteTaskBatch = () => {
+    const banchDeleted = Array.from(DeletedTaskSet)
+    fetch(`http://localhost:3001/task/`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        tasks: banchDeleted,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setData(prev => {
+          return prev.filter(task => !banchDeleted.includes(task._id))
+        })
+        DeletedTaskSet.clear()
+      })
+  }
   const editStatus = (id, value) => {
     fetch(`http://localhost:3001/task/${id}`, {
       method: "PUT",
@@ -61,6 +95,7 @@ export const Body = ({ data, setData }) => {
   return (
     <div className="main-section-body">
       <div className="card-wrapper">
+        <Button onClick={deleteTaskBatch}>delete</Button>
         {data.map((task, i) => {
           return (
             <CardContainer
@@ -69,6 +104,7 @@ export const Body = ({ data, setData }) => {
               onRemove={onRemoveTask}
               onEdit={editTask}
               editStatus={editStatus}
+              toggleDeletedTask={toggleDeletedTask}
             />
           );
         })}
