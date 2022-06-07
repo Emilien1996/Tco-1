@@ -3,10 +3,10 @@ import { Button } from "reactstrap";
 import CardContainer from "./CardsContainer";
 import "./styles.css";
 export const Body = ({ data, setData }) => {
-  const [DeletedTaskSet, setDeletedTask] = useState(new Set())
+  const [deletedTaskSet, setdeletedTaskSet] = useState(new Set())
   const toggleDeletedTask = (id) => {
 
-    setDeletedTask(prev => {
+    setdeletedTaskSet(prev => {
       const newSet = new Set(prev)
       if (newSet.has(id)) {
         newSet.delete(id)
@@ -17,7 +17,7 @@ export const Body = ({ data, setData }) => {
     })
   }
   const deleteTaskBatch = () => {
-    const banchDeleted = Array.from(DeletedTaskSet)
+    const banchDeleted = Array.from(deletedTaskSet)
     fetch(`http://localhost:3001/task/`, {
       method: "PATCH",
       body: JSON.stringify({
@@ -32,7 +32,7 @@ export const Body = ({ data, setData }) => {
         setData(prev => {
           return prev.filter(task => !banchDeleted.includes(task._id))
         })
-        DeletedTaskSet.clear()
+        setdeletedTaskSet(new Set())
       })
   }
   const editStatus = (id, value) => {
@@ -105,6 +105,7 @@ export const Body = ({ data, setData }) => {
               onEdit={editTask}
               editStatus={editStatus}
               toggleDeletedTask={toggleDeletedTask}
+              isChecked={deletedTaskSet.has(task._id)}
             />
           );
         })}

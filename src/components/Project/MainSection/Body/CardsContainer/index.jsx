@@ -20,7 +20,8 @@ const CardContainer = ({
   onRemove,
   onEdit,
   editStatus,
-  toggleDeletedTask
+  toggleDeletedTask,
+  isChecked
 }) => {
   const [editInput, setEditInput] = useState({
     title: {
@@ -54,8 +55,8 @@ const CardContainer = ({
   return (
     <div>
       <Card>
-        <Input type="checkbox" onClick={() => toggleDeletedTask(_id)} />
-        <Label check>
+        <Input type="checkbox" onClick={() => toggleDeletedTask(_id)} checked={isChecked} />
+        <Label>
           Select card
         </Label>
         <CardBody>
