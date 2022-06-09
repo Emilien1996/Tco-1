@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 import {
   Button,
   Form,
@@ -7,13 +8,14 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import { addNewTaskThunk } from "../../../../../redux/actions/task-actions";
 import {
   isRequired,
   maxLength20,
   minLength3,
 } from "../../../../../validation/validation";
 
-const AddTaskForm = ({ toggle, addTask }) => {
+const ConnectedAddTaskForm = ({ toggle, addNewTask }) => {
   const [InputsValue, setInputsValue] = useState({
     title: {
       value: "",
@@ -54,23 +56,7 @@ const AddTaskForm = ({ toggle, addTask }) => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    const optionsHeader = {
-      method: "POST",
-      headers: {
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(FormData),
-    };
-
-    fetch("http://localhost:3001/task", optionsHeader)
-      .then((res) => res.json())
-      .then(
-        (data) =>
-          addTask((prev) => {
-            return [...prev, data];
-          }),
-        toggle()
-      );
+    addNewTask(FormData, toggle);
   };
   return (
     <Form onSubmit={onSubmit}>
@@ -108,4 +94,6 @@ const AddTaskForm = ({ toggle, addTask }) => {
     </Form>
   );
 };
-export default AddTaskForm;
+export default AddTaskForm = connect(null, {
+  addNewTask: addNewTaskThunk,
+})(ConnectedAddTaskForm);

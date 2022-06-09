@@ -19,7 +19,7 @@ const ModalButton = () => {
       <Modal isOpen={isopen} toggle={toggle}>
         <ModalHeader toggle={toggle}>Title</ModalHeader>
         <ModalBody>
-          <AddTaskForm toggle={toggle} addTask={SetTasks} />
+          <AddTaskForm toggle={toggle} />
         </ModalBody>
         <ModalFooter></ModalFooter>
       </Modal>

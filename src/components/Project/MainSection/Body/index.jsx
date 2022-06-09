@@ -1,40 +1,26 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 import { Button } from "reactstrap";
+import { removeMultipleTaskThunk } from "../../../../redux/actions/task-actions";
 import CardContainer from "./CardsContainer";
 import "./styles.css";
-export const Body = ({ data, setData }) => {
-  const [deletedTaskSet, setdeletedTaskSet] = useState(new Set())
+const ConnectedBody = ({ data, removeMultipleTasks }) => {
+  const [deletedTaskSet, setdeletedTaskSet] = useState(new Set());
   const toggleDeletedTask = (id) => {
-
-    setdeletedTaskSet(prev => {
-      const newSet = new Set(prev)
+    setdeletedTaskSet((prev) => {
+      const newSet = new Set(prev);
       if (newSet.has(id)) {
-        newSet.delete(id)
+        newSet.delete(id);
       } else {
-        newSet.add(id)
+        newSet.add(id);
       }
-      return newSet
-    })
-  }
+      return newSet;
+    });
+  };
   const deleteTaskBatch = () => {
-    const banchDeleted = Array.from(deletedTaskSet)
-    fetch(`http://localhost:3001/task/`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        tasks: banchDeleted,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        setData(prev => {
-          return prev.filter(task => !banchDeleted.includes(task._id))
-        })
-        setdeletedTaskSet(new Set())
-      })
-  }
+    const banchDeleted = Array.from(deletedTaskSet);
+    removeMultipleTasks(banchDeleted);
+  };
   const editStatus = (id, value) => {
     fetch(`http://localhost:3001/task/${id}`, {
       method: "PUT",
@@ -113,3 +99,12 @@ export const Body = ({ data, setData }) => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  tasks: state.taskReducerState.tasks;
+};
+const mapDispatchToProps = (dispatch) => {
+  removeMultipleTask: (deletedTasksIds) => {
+    dispatch(removeMultipleTaskThunk(deletedTasksIds));
+  };
+};
+export const Body = connect(mapStateToProps, mapDispatchToProps)(ConnectedBody);
