@@ -94,6 +94,6 @@ const ConnectedAddTaskForm = ({ toggle, addNewTask }) => {
     </Form>
   );
 };
-export default AddTaskForm = connect(null, {
+export const AddTaskForm = connect(null, {
   addNewTask: addNewTaskThunk,
 })(ConnectedAddTaskForm);

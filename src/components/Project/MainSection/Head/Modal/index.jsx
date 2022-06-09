@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { TaskContext } from "../../..";
-import AddTaskForm from "../ValidForm";
+import { AddTaskForm } from "../ValidForm";
 
 const ModalButton = () => {
   const [isopen, setisopen] = useState(false);

@@ -1,16 +1,17 @@
-import { applyMiddleware, compose, createStore } from "redux";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
-import {taskReducer} from './reducers/task-reducer'
+import { taskReducer } from "./reducers/task-reducer";
+
 
 
 
 const rootReducer = combineReducers({
-	taskReducerState:taskReducer,
+	taskReducerState: taskReducer,
 })
 
 const middlewares = [thunk]
 
-const store = createStore(
+export const store = createStore(
 	rootReducer,
 	compose(applyMiddleware(...middlewares))
 )

@@ -7,7 +7,6 @@ import "./styles.css";
 export const TaskContext = createContext();
 export const ConnectedProject = (getTasks) => {
   const [queryObject, setQueryObject] = useState({});
-  const user = useSelector((state) => console.log(state));
   const generateQuery = (filterObject) => {
     // [['sort','created_at'] ,['search','barev']]]
     return Object.entries(filterObject).reduce((query, [field, value]) => {

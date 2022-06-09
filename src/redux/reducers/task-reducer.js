@@ -1,7 +1,7 @@
 const initialState = {
     task: []
 }
-const taskReducer = (state = initialState, action) => {
+export const taskReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SET_TASK": {
             return {
@@ -9,8 +9,8 @@ const taskReducer = (state = initialState, action) => {
                 task: action.payload
             }
         }
-          
-        case "REMOVE_MULTIPLE_TASK":{
+
+        case "REMOVE_MULTIPLE_TASK": {
             const deletedTaskId = action.payload
             const tasks = state.task.filter(task => !deletedTaskId.includes(task._id))
             return {
@@ -18,10 +18,10 @@ const taskReducer = (state = initialState, action) => {
                 tasks
             }
         }
-            
-        case "ADD_NEW_TASK":{
+
+        case "ADD_NEW_TASK": {
             const newTask = action.payload
-            const tasks = [...state.task,newTask]
+            const tasks = [...state.task, newTask]
             return {
                 ...state,
                 tasks
