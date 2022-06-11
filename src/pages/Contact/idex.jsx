@@ -31,7 +31,9 @@ const Contact = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(contactData),
-    });
+    })
+      .then(() => e.target.reset())
+
   };
 
   return (
@@ -68,7 +70,7 @@ const Contact = () => {
             />
           </Col>
         </FormGroup>{" "}
-        <Button>Submit</Button>
+        <Button onSubmit={ContactSubmit}>Submit</Button>
       </Form>
     </div>
   );

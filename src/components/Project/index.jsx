@@ -1,11 +1,11 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getTaskThunk } from "../../redux/actions/task-actions";
 import { FilterSection } from "./FilterSection";
 import { MainSection } from "./MainSection";
 import "./styles.css";
-export const TaskContext = createContext();
-export const ConnectedProject = (getTask) => {
+
+export const ConnectedProject = ({ getTask }) => {
   const [queryObject, setQueryObject] = useState({});
   const generateQuery = (filterObject) => {
     // [['sort','created_at'] ,['search','barev']]]
@@ -39,10 +39,8 @@ export const ConnectedProject = (getTask) => {
   });
   return (
     <div className="project-layout">
-      <TaskContext.Provider value={{ setFilteredField }}>
-        <FilterSection setFilteredField={setFilteredField} />
-        <MainSection />
-      </TaskContext.Provider>
+      <FilterSection setFilteredField={setFilteredField} />
+      <MainSection />
     </div>
   );
 };
