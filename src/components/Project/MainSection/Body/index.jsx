@@ -21,16 +21,9 @@ const ConnectedBody = ({ data, removeMultipleTasks }) => {
     const banchDeleted = Array.from(deletedTaskSet);
     removeMultipleTasks(banchDeleted);
   };
-  const editStatus = (id, value) => {
-
-  };
-  const editTask = (id, title, description, onClose) => {
-
-
-  };
-  const onRemoveTask = (id) => {
-
-  };
+  const editStatus = (id, value) => {};
+  const editTask = (id, title, description, onClose) => {};
+  const onRemoveTask = (id) => {};
   return (
     <div className="main-section-body">
       <div className="card-wrapper">
@@ -52,12 +45,12 @@ const ConnectedBody = ({ data, removeMultipleTasks }) => {
     </div>
   );
 };
-const mapStateToProps = (state) => {
-  tasks: state.taskReducerState.tasks;
-};
-const mapDispatchToProps = (dispatch) => {
-  removeMultipleTask: (deletedTasksIds) => {
-    dispatch(removeMultipleTaskThunk(deletedTasksIds));
-  };
-};
+
+const mapStateToProps = (state) => ({
+  data: state.taskReducerState.task,
+});
+const mapDispatchToProps = (dispatch) => ({
+  removeMultipleTasks: (deletedTasksIds) =>
+    dispatch(removeMultipleTaskThunk(deletedTasksIds)),
+});
 export const Body = connect(mapStateToProps, mapDispatchToProps)(ConnectedBody);

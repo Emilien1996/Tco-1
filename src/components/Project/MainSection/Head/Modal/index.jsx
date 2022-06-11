@@ -5,7 +5,6 @@ import { AddTaskForm } from "../ValidForm";
 
 const ModalButton = () => {
   const [isopen, setisopen] = useState(false);
-  const { SetTasks } = useContext(TaskContext);
 
   const toggle = () => {
     setisopen((isopen) => !isopen);

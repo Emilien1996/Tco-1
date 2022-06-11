@@ -1,11 +1,11 @@
 import { createContext, useCallback, useEffect, useState } from "react";
-import { connect, } from "react-redux";
+import { connect } from "react-redux";
 import { getTaskThunk } from "../../redux/actions/task-actions";
 import { FilterSection } from "./FilterSection";
 import { MainSection } from "./MainSection";
 import "./styles.css";
 export const TaskContext = createContext();
-export const ConnectedProject = (getTasks) => {
+export const ConnectedProject = (getTask) => {
   const [queryObject, setQueryObject] = useState({});
   const generateQuery = (filterObject) => {
     // [['sort','created_at'] ,['search','barev']]]
@@ -17,7 +17,7 @@ export const ConnectedProject = (getTasks) => {
 
   useEffect(() => {
     const query = generateQuery(queryObject);
-    getTasks(query);
+    getTask(query);
   }, [queryObject]);
   const setFilteredField = useCallback((filterEntries) => {
     const [name, value] = filterEntries;
@@ -47,5 +47,5 @@ export const ConnectedProject = (getTasks) => {
   );
 };
 export const Project = connect(null, {
-  getTasks: getTaskThunk,
+  getTask: getTaskThunk,
 })(ConnectedProject);
